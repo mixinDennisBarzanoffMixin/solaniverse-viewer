@@ -32,7 +32,7 @@ function App() {
 
     return (
         <div style={{position: "relative"}}>
-            <LoadingScreen enabled={!initialized}/>
+            {/*<LoadingScreen enabled={!initialized}/>*/}
             {/*TODO: get the seed of the NFT and pass it to the method*/}
             <Wallet/>
             <Player enabled={initialized} url={"background_audio.mp3"}/>
