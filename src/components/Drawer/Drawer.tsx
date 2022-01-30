@@ -9,6 +9,7 @@ interface DrawerInt {
 interface DrawerItemInt {
     icon?: ReactNode;
     to: To;
+    external?: boolean;
 }
 interface DrawerMainInt {
     logo: string;
@@ -31,15 +32,29 @@ const DrawerItem:FC<DrawerItemInt> = (props) => {
         location.pathname, 
         props.to.toString(),
       ); 
+    const linkStyle = `drawer__item ${isActiveRoute ? 'active' : ''}`;
+    const inner = (
+        <>
+            <div className={`drawer__item__text ${isActiveRoute ? 'active' : ''}`}>
+                {props.children}
+            </div>
+            <div className={`drawer__item__icon ${isActiveRoute ? 'active' : ''}`}>{props.icon ?? <></>}</div>
+        </>
+    );
+    if (props.external) {
+        return (
+            <a href={props.to.toString()} className={linkStyle}>{inner}</a>
+        );
+    }
     return (
-        <NavLink to={props.to}  className={`drawer__item ${isActiveRoute ? 'active' : ''}`}>
-                <div className={`drawer__item__text ${isActiveRoute ? 'active' : ''}`}>
-                    {props.children}
-                </div>
-                <div className={`drawer__item__icon ${isActiveRoute ? 'active' : ''}`}>{props.icon ?? <></>}</div>
-        </NavLink>
+        <Link to={props.to} className={linkStyle}>{inner}</Link>
     );
 }
+
+DrawerItem.defaultProps = {
+    external: false,
+}
+
 
 const DrawerMain: FC<DrawerMainInt> = (props) => {
     return (
