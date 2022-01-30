@@ -1,6 +1,6 @@
-import {Button} from "@mui/material";
+// import {Button} from "@mui/material";
 import React, {useState, useEffect} from "react";
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
+// import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import styles from "../Player/Player.module.css";
 // @ts-ignore
 const useAudio = (url, enabled) => {
@@ -38,9 +38,9 @@ const Player = ({url, enabled}) => {
 
     return (
         <div className={styles.audioPlayer}>
-            <Button onClick={toggle as () => void} variant="contained" endIcon={<MusicNoteIcon/>}>
+            <button onClick={toggle as () => void} >
                 Toggle sound
-            </Button>
+            </button>
         </div>
     );
 
