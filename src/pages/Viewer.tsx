@@ -25,9 +25,6 @@ const Viewer = () => {
         unityContext.on("SceneInitialized", () => {
             setInitialized(true);
         });
-        setTimeout(() => {
-            setInitialized(true);
-        }, 2000);
     }, []);
 
     const GeneratePlanet = (seed: number) => {
