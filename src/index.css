@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600&display=swap');
+
+:root {
+  --icon-size: 3em;
+  --drawer-padding-horizontal: 4em;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +17,167 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(240, 38%, 13%);
+}
+
+.container > * {
+  position: absolute;
+}
+
+.drawer {
+  right: 0;
+  z-index: 4;
+  height: 100vh;
+  width: calc(var(--icon-size) + var(--drawer-padding-horizontal));
+  background-color: grey;
+  transition: width 0.2s ease;
+  background-color: hsl(208, 89%, 10%);
+  /* background-color: hsl(210, 7%, 11%); */
+}
+
+.drawer:hover {
+  width: calc(12em + var(--drawer-padding-horizontal));
+  display: flex;
+  flex-direction: column;
+}
+.drawer:hover  .drawer__item__text {
+  display: block;
+  opacity: 1;
+}
+.drawer:hover .drawer__item__icon {
+  margin-right: 0em;
+}
+
+.drawer .drawer__main {
+  height: 6em;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: end;
+  width: calc(100% - var(--drawer-padding-horizontal) + 2em);
+  margin-top: calc(var(--drawer-padding-horizontal) / 2);
+}
+
+.drawer .drawer__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  background-color: initial;
+  transition: background-color 0.2s ease, margin 0.2s ease, width 0.2s ease;
+  cursor: pointer;
+  border-radius: 0.5em;
+  width: calc(100% - var(--drawer-padding-horizontal));
+  /* width: calc(100% - (var(--icon-size) * 2)); */
+  height: calc(var(--icon-size));
+  text-decoration: none;
+  /* margin-left: calc((100% - (var(--icon-size))) / 2); */
+  /* margin-right: calc((100% - (var(--icon-size))) / 2); */
+}
+.drawer:hover .drawer__item {
+  width: calc(100% - var(--drawer-padding-horizontal) + 2em);
+}
+.drawer .drawer__item.active {
+  background-color: hsl(199, 87%, 12%);
+}
+
+.drawer .drawer__item:hover {
+  background-color: hsl(199, 87%, 12%);
+}
+.drawer .drawer__item__icon {
+  color: hsl(230, 4%, 70%);
+  aspect-ratio: 1;
+  min-height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-left: 0.5em;
+  margin-right: 0.5em; */
+  transition: margin 0.2s ease;
+}
+.drawer .drawer__item__text {
+  opacity: 0;
+  display: none;
+  padding-left: 3em;
+  padding-right: auto;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: 'Rajdhani', sans-serif;
+  transition: opacity 5s ease;
+  color: hsl(230, 4%, 70%);
+}
+
+.drawer .drawer__item:hover .drawer__item__icon, .drawer .drawer__item.active .drawer__item__icon {
+  color: hsl(180, 2%, 92%);
+}
+.drawer .drawer__item:hover .drawer__item__text, .drawer .drawer__item.active .drawer__item__text {
+  color: hsl(180, 2%, 92%);
+}
+
+.drawer .drawer__section {
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+  margin-top: 1rem;
+}
+.drawer:hover .drawer__section {
+  /* padding-left: calc(var(--drawer-padding-horizontal) / 2);
+  padding-right: calc(var(--drawer-padding-horizontal) / 2); */
+}
+.drawer .drawer__section__title {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items:center;
+  margin-right: 3em;
+}
+.drawer .drawer__section__title > span{
+  color: hsl(203, 6%, 44%);
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: bold;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  text-align: center;
+  width: 42px;
+  /* margin-right: 1em; */
+}
+.drawer:hover .drawer__section__title > span {
+}
+
+.drawer .drawer__main__logo {
+  height: var(--icon-size);
+  width: var(--icon-size);
+  border-radius: .8em;
+  display: block;
+}
+
+.viewer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.viewer > * {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+.unity {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
