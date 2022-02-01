@@ -23,7 +23,8 @@ code {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: hsl(240, 38%, 13%);
+  /* background-color: hsl(240, 38%, 13%); */
+  background-color: #161535;
 }
 
 .container > * {
@@ -180,4 +181,48 @@ code {
   width: 100%;
   height: 100%;
   z-index: 1;
+}
+
+.progress {
+  background: #655f5f;
+  border-radius: 10px;
+  height: 6px;
+  width: 300px;
+  padding: 1px;
+}
+
+.progress > div {
+  background: hsl(199, 87%, 12%);
+  height: 100%;
+  border-radius: 18px;
+  animation-duration: 2s;
+  animation-name: slidein;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slidein {
+  from {
+    width: 0%;
+  }
+
+  20% {
+    width: 30%;
+  }
+
+  55% {
+    width: 32%;
+  }
+
+  
+  80% {
+    width: 70%;
+  }
+
+  90% {
+    width: 72%;
+  }
+
+  to {
+    width: 100%;
+  }
 }

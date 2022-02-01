@@ -18,11 +18,11 @@ const Layout = () => {
             <Drawer>
                 <DrawerMain logo={logo}></DrawerMain>
                 <DrawerSection title="interact">
-                    <DrawerItem to="/" icon={<FontAwesomeIcon icon={faEye} size="1x"/>}>Viewer</DrawerItem>
+                    <DrawerItem to="/viewer" icon={<FontAwesomeIcon icon={faEye} size="1x"/>}>Viewer</DrawerItem>
                 </DrawerSection>
                 <DrawerSection title="misc">
                     <DrawerItem to="/market" icon={<FontAwesomeIcon icon={faShoppingBag} size="1x" />}>Market</DrawerItem>
-                    <DrawerItem to="/inventory" icon={<FontAwesomeIcon icon={faBoxes} size="1x"></FontAwesomeIcon>}>Inventory</DrawerItem>
+                    <DrawerItem to="/" icon={<FontAwesomeIcon icon={faBoxes} size="1x"></FontAwesomeIcon>}>Inventory</DrawerItem>
                     <DrawerItem to="/wallet" icon={<FontAwesomeIcon icon={faWallet} size="1x"/>}>Wallet</DrawerItem>
                 </DrawerSection>
                 <div style={{height: '1em'}}></div>

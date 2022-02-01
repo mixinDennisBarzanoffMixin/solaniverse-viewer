@@ -15,10 +15,10 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>
-                    <Route index element={<KeepAlive name="viewer"><Viewer /></KeepAlive>} />
+                    <Route path="viewer" element={<KeepAlive name="viewer"><Viewer /></KeepAlive>} />
                     <Route path="market" element={<Market />} />
-                    <Route path="inventory" element={<Inventory />} />
-                    <Route path="wallet" element={<Wallet />} />
+                    <Route index element={<Inventory />} />
+                    <Route path="inventory" element={<Wallet />} />
                     <Route path="*" element={<NoPage />} />
                     </Route>
                 </Routes>
