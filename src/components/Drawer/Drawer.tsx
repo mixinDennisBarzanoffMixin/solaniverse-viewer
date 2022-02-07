@@ -13,6 +13,7 @@ interface DrawerItemInt {
 }
 interface DrawerMainInt {
     logo: string;
+    wallet?: ReactNode;
 }
 interface DrawerSectionInt {
     title: string;
@@ -59,7 +60,11 @@ DrawerItem.defaultProps = {
 const DrawerMain: FC<DrawerMainInt> = (props) => {
     return (
         <div className="drawer__main">
-            <img className="drawer__main__logo" src={props.logo} />
+            {/* <div> */}
+                <div className="drawer__main__wallet">{props.wallet}</div>
+                <div style={{width: '1em'}}></div>
+                <img className="drawer__main__logo" src={props.logo} />
+            {/* </div> */}
         </div>
     );
 }

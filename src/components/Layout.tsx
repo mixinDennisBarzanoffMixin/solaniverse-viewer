@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBag, faWallet, faBoxes, faEye } from '@fortawesome/free-solid-svg-icons';
 import {faTwitter,faDiscord} from '@fortawesome/free-brands-svg-icons';
 import logo from '../assets/logo.jpeg';
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 // import '@font-awesome/css/font-awesome.css';
 
 
@@ -14,9 +15,15 @@ const Layout = () => {
   return (
     <>
         <div className="container">
-            <Outlet />
+            <div className="drawer-space">
+                <Outlet />
+            </div>
             <Drawer>
-                <DrawerMain logo={logo}></DrawerMain>
+                <DrawerMain logo={logo} wallet={
+                    <div>
+                        <WalletMultiButton />
+                    </div>
+                }></DrawerMain>
                 <DrawerSection title="interact">
                     <DrawerItem to="/viewer" icon={<FontAwesomeIcon icon={faEye} size="1x"/>}>Viewer</DrawerItem>
                 </DrawerSection>
