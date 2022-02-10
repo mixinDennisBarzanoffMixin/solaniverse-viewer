@@ -5,11 +5,12 @@ import styles from './Button.module.css'; // Import css modules stylesheet as st
 interface ButtonInt {
     color: string;
     children: ReactNode[] | ReactNode | undefined;
+    onClick: () => void;
 }
 
 const Button:FC<ButtonInt> = (props) => {
     return (
-        <a href="#" className={`${styles.pushable} stars__button-group__button--view-on-solana`}>
+        <a onClick={props.onClick} href="#" className={`${styles.pushable} stars__button-group__button--view-on-solana`}>
             <span className={`${styles.front} stars__button-group__button--view-on-solana-light typography-h3 typography-bold`}>{props.children}</span>
         </a>
     )

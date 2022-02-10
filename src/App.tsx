@@ -21,6 +21,7 @@ import {
     getSolflareWallet,
 } from '@solana/wallet-adapter-wallets';
 import { WALLET_NETWORK } from "./config";
+import { PlanetConfigProvider } from "./providers/planet_config_provider";
 
 function App() {
     const network = WALLET_NETWORK;
@@ -46,25 +47,27 @@ function App() {
 
     return (
         <>
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>
-                    <Provider include="viewer">
-                        <BrowserRouter>
-                            <Routes>
-                                <Route path="/" element={<Layout />}>
-                                <Route path="viewer" element={<KeepAlive name="viewer"><Viewer /></KeepAlive>} />
-                                <Route path="market" element={<Market />} />
-                                <Route index element={<Inventory />} />
-                                <Route path="inventory" element={<Wallet />} />
-                                <Route path="*" element={<NoPage />} />
-                                </Route>
-                            </Routes>
-                        </BrowserRouter>
-                    </Provider>
-                </WalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
+            <PlanetConfigProvider>
+                <ConnectionProvider endpoint={endpoint}>
+                    <WalletProvider wallets={wallets} autoConnect>
+                        <WalletModalProvider>
+                            <Provider include="viewer">
+                                <BrowserRouter>
+                                    <Routes>
+                                        <Route path="/" element={<Layout />}>
+                                            <Route path="viewer" element={<KeepAlive name="viewer"><Viewer /></KeepAlive>} />
+                                            <Route path="market" element={<Market />} />
+                                            <Route index element={<Inventory />} />
+                                            <Route path="inventory" element={<Wallet />} />
+                                            <Route path="*" element={<NoPage />} />
+                                        </Route>
+                                    </Routes>
+                                </BrowserRouter>
+                            </Provider>
+                        </WalletModalProvider>
+                    </WalletProvider>
+                </ConnectionProvider>
+            </PlanetConfigProvider>
         </>
     );
 }

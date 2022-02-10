@@ -6,6 +6,8 @@ import { getParsedNftAccountsByOwner,isValidSolanaAddress, createConnectionConfi
 import { useWallet } from '@solana/wallet-adapter-react';
 import Button from '../components/Button/Button';
 import LoadingScreen from '../components/LoadingScreen/LoadingScreen';
+import { usePlanetConfig } from '../providers/planet_config_provider';
+import { useNavigate } from "react-router-dom";
 
 
 // const connection = new Connection(clusterApiUrl(WALLET_NETWORK));
@@ -86,22 +88,26 @@ const getAllNftData = async (publicKey: string) => {
   }
 };
 
-type NFTEntity = {
+interface NFTEntity {
   uri: string;
   name: string;
   authority: string; // creator?
 }
 
-type Shuttle = NFTEntity  & {
+interface Shuttle extends NFTEntity {
   role: string; 
   type: string;
 }
-type Planet = NFTEntity & {
+interface Planet extends NFTEntity  {
   seed: string;
   size: string;
   resourse_quantity: string; 
   skyType: string;
   resourceType: string;
+}
+
+function isPlanet(arg: any): arg is Planet {
+  return arg.seed !== undefined;
 }
 
 interface ShuttleResult {
@@ -198,9 +204,18 @@ const useShuttles = () => {
 
 const Inventory = () => {
     const shuttles = useShuttles();
+    const planetConfig = usePlanetConfig();
+    let navigate = useNavigate()
+
     console.log(shuttles);
     if (shuttles.loading) {
       return <LoadingScreen enabled={true}></LoadingScreen>;
+    }
+    const hanleShuttleSelected = (entity: NFTEntity) => {
+      if (isPlanet(entity)) {
+        planetConfig.setSeed(entity.seed);
+        navigate(`/viewer?id=${entity.seed}`)
+      }
     }
     return (
       <div className="examples">
@@ -212,7 +227,7 @@ const Inventory = () => {
                       <img src={shuttle.uri} draggable="false" alt="example"/>
                       <h3 className="examples__card__text">{shuttle.name}</h3>
                       <div className="examples__card__button">
-                          <Button color='red' >View on Solana (Coming Soon)</Button>
+                          <Button color='red' onClick={() => hanleShuttleSelected(shuttle)}>Try it out!</Button>
                       </div>
                   </section>
               </div>

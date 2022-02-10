@@ -1,18 +1,20 @@
 
 import React, {FC, useEffect, useRef, useState} from 'react';
 import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
+import { usePlanetConfig } from '../providers/planet_config_provider';
 
 
 
 const Viewer = () => {
     const [initialized, setInitialized] = useState(false);
+    const { seed } = usePlanetConfig();
 
 
     return (
         <div>
             <div className="viewer">
                 <LoadingScreen enabled={!initialized}/> 
-                <UnityComponent setInitialized={setInitialized}/>
+                <UnityComponent setInitialized={setInitialized} seed={seed}/>
             </div>
         </div>
     );
@@ -20,6 +22,7 @@ const Viewer = () => {
 
   interface UnityComponentInt {
       setInitialized: Function;
+      seed: string | undefined;
   }
 
   interface UnityBundle {
@@ -68,7 +71,8 @@ const Viewer = () => {
     } else {
         // do componentDidUpdate logic
         // seed changed
-        component?.onShouldGenerate(1234);
+        component?.onShouldGenerate(props.seed);
+        console.log('regenerating planet for ' + props.seed);
     }
     });
     
