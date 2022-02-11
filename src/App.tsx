@@ -45,6 +45,8 @@ function App() {
         [network]
     );
 
+
+
     return (
         <>
             <PlanetConfigProvider>
@@ -55,7 +57,7 @@ function App() {
                                 <BrowserRouter>
                                     <Routes>
                                         <Route path="/" element={<Layout />}>
-                                            <Route path="viewer" element={<KeepAlive name="viewer"><Viewer /></KeepAlive>} />
+                                            <Route path="viewer" element={<Viewer />} />
                                             <Route path="market" element={<Market />} />
                                             <Route index element={<Inventory />} />
                                             <Route path="inventory" element={<Wallet />} />

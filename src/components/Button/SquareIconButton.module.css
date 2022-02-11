@@ -1,0 +1,10 @@
+.squareIconButton {
+    width: 3em;
+    height: 3em;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5em;
+    cursor: pointer;
+}

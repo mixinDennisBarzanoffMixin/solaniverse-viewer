@@ -4,6 +4,8 @@ import { JsxElement } from "typescript";
 
 interface DrawerInt {
     // onClose: Function;
+    // onOpen?: () => void;
+    // onClose?: () => void;
     // visible: boolean;
 }
 interface DrawerItemInt {
