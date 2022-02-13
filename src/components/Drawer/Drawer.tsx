@@ -64,7 +64,7 @@ const DrawerMain: FC<DrawerMainInt> = (props) => {
         <div className="drawer__main">
             {/* <div> */}
                 <div className="drawer__main__wallet">{props.wallet}</div>
-                <div style={{width: '1em'}}></div>
+                {/* <div style={{width: '1em'}}></div> */}
                 <img className="drawer__main__logo" src={props.logo} />
             {/* </div> */}
         </div>
