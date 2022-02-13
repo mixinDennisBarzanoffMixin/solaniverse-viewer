@@ -65,12 +65,15 @@ export const SelectWalletButton: FC<ButtonProps> = ({ children, ...props }) => {
         ...{maxWidth: '0.85em', maxHeight: '0.85em'},
         flexShrink: '2',
     };
+    const textStyles = {
+        fontSize: 16, fontWeight: 600, fontFamily:"'Rajdhani', sans-serif",
+    };
     const onlyTextButtonStyles = {
-        fontSize: 16, fontWeight: 600, fontFamily:"'Rajdhani', sans-serif", color: styles.color, flexGrow: 2,
+      color: styles.color, flexGrow: 2,...textStyles,
     };
 
-    if (!wallet) return <WalletModalButton {...props} style={styles}>{children}</WalletModalButton>;
-    if (!base58) return <WalletConnectButton {...props} style={styles}>{children}</WalletConnectButton>;
+    if (!wallet) return <WalletModalButton {...props} style={{...styles, ...textStyles}}>{children}</WalletModalButton>;
+    if (!base58) return <WalletConnectButton {...props} style={{...styles, ...textStyles}}>{children}</WalletConnectButton>;
 
     return (
         <div className="wallet-adapter-dropdown" style={{width: '100%'}}>
