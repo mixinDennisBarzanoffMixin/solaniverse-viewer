@@ -13,7 +13,7 @@ const FullProgressIndicator = styled(ProgressIndicator)`
 `;
 
 // @ts-ignore
-const LoadingScreen = (props) => {
+const LoadingScreenControls = (props) => {
     if (!props.enabled) {
         return null;
     }
@@ -30,17 +30,17 @@ const LoadingScreen = (props) => {
                     <div style={{display: 'flex', alignItems: 'center', gridArea: 'b', placeContent: 'flex-end'}}>
                         <img src={mouseImage} alt="computer mouse" style={{maxWidth: '100%', height: '3em'}}/>
                         <div style={{width: '3em'}}></div>
-                        <h4 className="typography-h3" style={{color: 'hsl(180, 2%, 92%)'}}>Move around</h4>
+                        <h4 className="typography-h3" style={{color: 'hsl(180, 2%, 92%)'}}>Camera movement</h4>
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', gridArea: 'c', placeContent: 'flex-end'}}>
                         <img src={qImage} alt="Q key" style={{maxWidth: '100%', height: '3em'}}/>
                         <div style={{width: '3em'}}></div>
-                        <h4 className="typography-h3" style={{color: 'hsl(180, 2%, 92%)'}}>Move around</h4>
+                        <h4 className="typography-h3" style={{color: 'hsl(180, 2%, 92%)'}}>Switch camera</h4>
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', gridArea: 'd', placeContent: 'flex-end'}}>
                         <img src={escImage} alt="esc key" style={{maxWidth: '100%', height: '3em'}}/>
                         <div style={{width: '3em'}}></div>
-                        <h4 className="typography-h3" style={{color: 'hsl(180, 2%, 92%)'}}>Move around</h4>
+                        <h4 className="typography-h3" style={{color: 'hsl(180, 2%, 92%)'}}>Exit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
                     </div>
                 </div>
                 <FullProgressIndicator></FullProgressIndicator>
@@ -52,5 +52,5 @@ const LoadingScreen = (props) => {
     </div>
 }
 
-export default LoadingScreen;
+export default LoadingScreenControls;
 
