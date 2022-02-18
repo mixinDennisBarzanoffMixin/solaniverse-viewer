@@ -58,8 +58,8 @@ const Viewer = () => {
                 props.setInitialized(true);
             });
             const Unity = module.default;
-            const GeneratePlanet = (seed: number) => {
-                unityContext.send("GameController", "GeneratePlanet", seed);
+            const GeneratePlanet = (seed: string) => {
+                unityContext.send("GameController", "GeneratePlanet", parseInt(seed));
             }
             
             setComponent( 
