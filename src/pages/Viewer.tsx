@@ -1,6 +1,6 @@
 
 import React, {FC, useEffect, useRef, useState} from 'react';
-import LoadingScreen from "../components/LoadingScreen/LoadingScreen";
+import LoadingScreen from "../components/LoadingScreen/LoadingScreenControls";
 import { usePlanetConfig } from '../providers/planet_config_provider';
 import { faCompress, faExpand } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,7 +16,9 @@ const Viewer = () => {
     return (
         <div>
             <div className="viewer">
-                <LoadingScreen enabled={!initialized} onClick={() => console.log('sleep')}/> 
+                <div style={{width: '100%', height: '100%'}}>
+                    <LoadingScreen enabled={!initialized} onClick={() => console.log('sleep')}/> 
+                </div>
                 <div style={{width: '100%', height: '100%'}} className={fullscreen ? 'fullscreen' : ''}><UnityComponent setInitialized={setInitialized} seed={seed}/></div>
                 <div className="fullscreen-button"><SquareIconButton onClick={() => setFullscreen(!fullscreen)}><FontAwesomeIcon icon={fullscreen ? faCompress : faExpand} size="2x" color="#697277" /></SquareIconButton></div>
             </div>

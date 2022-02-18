@@ -1,9 +1,19 @@
 import React, { useEffect } from 'react';
 import styles from './LoadingScreen.module.css';
 import ProgressIndicator from './ProgessIndicator';
+import wasdImage from '../../assets/wasd.png';
+import escImage from '../../assets/esc.png';
+import mouseImage from '../../assets/mouse.png';
+import qImage from '../../assets/q.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
+
+const FullProgressIndicator = styled(ProgressIndicator)`
+    width: 100%;
+`;
 
 // @ts-ignore
-const LoadingScreen = (props) => {
+const LoadingScreenPlanet = (props) => {
     if (!props.enabled) {
         return null;
     }
@@ -18,4 +28,4 @@ const LoadingScreen = (props) => {
     </div>
 }
 
-export default LoadingScreen;
+export default LoadingScreenPlanet;

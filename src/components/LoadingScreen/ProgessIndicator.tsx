@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 const ProgressIndicator: FC = (args) => {
     return <div className="progress"><div></div></div>

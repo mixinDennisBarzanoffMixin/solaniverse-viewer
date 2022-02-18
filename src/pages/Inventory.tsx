@@ -5,9 +5,10 @@ import { Connection, clusterApiUrl, LAMPORTS_PER_SOL, PublicKey } from "@solana/
 import { getParsedNftAccountsByOwner,isValidSolanaAddress, createConnectionConfig,} from "@nfteyez/sol-rayz";
 import { useWallet } from '@solana/wallet-adapter-react';
 import Button from '../components/Button/Button';
-import LoadingScreen from '../components/LoadingScreen/LoadingScreen';
+import LoadingScreen from '../components/LoadingScreen/LoadingScreenControls';
 import { usePlanetConfig } from '../providers/planet_config_provider';
 import { useNavigate } from "react-router-dom";
+import LoadingScreenPlanet from '../components/LoadingScreen/LoadingScreenPlanet';
 
 
 // const connection = new Connection(clusterApiUrl(WALLET_NETWORK));
@@ -209,7 +210,7 @@ const Inventory = () => {
 
     console.log(shuttles);
     if (shuttles.loading) {
-      return <LoadingScreen enabled={true}></LoadingScreen>;
+      return <LoadingScreenPlanet enabled={true}></LoadingScreenPlanet>;
     }
     const hanleShuttleSelected = (entity: NFTEntity) => {
       if (isPlanet(entity)) {

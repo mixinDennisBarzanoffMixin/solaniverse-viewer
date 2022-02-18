@@ -1,6 +1,6 @@
 .container {
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
+    min-width: 100%;
+    min-height: 100%;
     z-index: 3;
     align-items: center;
     display: flex;
@@ -13,4 +13,17 @@
     max-width: 12em;
     aspect-ratio: 1;
     /* object-fit: cover; */
+}
+
+.controls {
+  display: grid; 
+  grid-template-columns: 1fr 20em 2.5em 15em 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 10px 36px; 
+  grid-template-areas: 
+    ". a . b ."
+    ". c . d ."; 
+  /* height: 30em;  */
+  flex-grow: 1;
+  align-items: center;
 }
