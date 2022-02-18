@@ -17,9 +17,9 @@ const LoadingScreenControls = (props) => {
     if (!props.enabled) {
         return null;
     }
-    return <div className={styles.container} style={{transform: 'scale(0.8, 0.8)'}}>
+    return <div className={styles.container} >
         <div style={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}} >
-            <div style={{height: '60vh', minWidth: '20em', width: '60vw', backgroundColor: 'hsl(209, 82%, 17%)', display: 'flex', flexDirection: 'column', borderRadius: '20px', padding: '1em', flex: 1}}>
+            <div style={{height: '60vh', minWidth: '20em', width: '60vw', backgroundColor: 'hsl(209, 82%, 17%)', display: 'flex', flexDirection: 'column', borderRadius: '20px', padding: '1em', flex: 1, transform: 'scale(0.8, 0.8)'}}>
                 <span className="typography-h2" style={{color: 'hsl(180, 2%, 92%)', flexShrink: 1}}>Controls</span>
                 <div className={styles.controls} style={{width: '100%', height: '100%', flexGrow: 1}}>
                     <div style={{display: 'flex', alignItems: 'center', gridArea: 'a', placeContent: 'flex-end'}}>
