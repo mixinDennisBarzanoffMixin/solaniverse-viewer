@@ -2,6 +2,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal, WalletConnectButton, WalletIcon, WalletModalButton } from "@solana/wallet-adapter-react-ui";
 import { Button, ButtonProps } from "@solana/wallet-adapter-react-ui/lib/Button";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import '@solana/wallet-adapter-react-ui/styles.css';
 
 export const SelectWalletButton: FC<ButtonProps> = ({ children, ...props }) => {
     const { publicKey, wallet, disconnect } = useWallet();

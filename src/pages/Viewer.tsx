@@ -17,10 +17,14 @@ const Viewer = () => {
         <div>
             <div className="viewer">
                 <div style={{width: '100%', height: '100%'}} className={fullscreen ? 'fullscreen' : ''}><UnityComponent setInitialized={setInitialized} seed={seed}/></div>
-                <div style={{width: '100%', height: '100%'}}>
-                    <LoadingScreenControls enabled={!initialized} onClick={() => console.log('sleep')}/> 
-                </div>
-                <div className="fullscreen-button"><SquareIconButton onClick={() => setFullscreen(!fullscreen)}><FontAwesomeIcon icon={fullscreen ? faCompress : faExpand} size="2x" color="#697277" /></SquareIconButton></div>
+                {!initialized &&
+                    <div style={{width: '100%', height: '100%'}}>
+                        <LoadingScreenControls enabled={!initialized} onClick={() => console.log('sleep')}/> 
+                    </div>
+                }
+                <div className="fullscreen-button"><SquareIconButton onClick={() => {
+                    return setFullscreen(!fullscreen);
+                }}><FontAwesomeIcon icon={fullscreen ? faCompress : faExpand} size="2x" color="#697277" /></SquareIconButton></div>
             </div>
         </div>
     );

@@ -49,29 +49,17 @@ function App() {
 
     return (
         <>
-            <Provider include="viewer">
                 <PlanetConfigProvider>
                     <ConnectionProvider endpoint={endpoint}>
                         <WalletProvider wallets={wallets} autoConnect>
                             <WalletModalProvider>
-                                <Provider include="viewer">
-                                    <BrowserRouter>
-                                        <Routes>
-                                            <Route path="/" element={<Layout />}>
-                                                <Route path="viewer" element={<KeepAlive name="viewer"><Viewer /></KeepAlive>} />
-                                                <Route path="market" element={<Market />} />
-                                                <Route index element={<Inventory />} />
-                                                <Route path="inventory" element={<Wallet />} />
-                                                <Route path="*" element={<NoPage />} />
-                                            </Route>
-                                        </Routes>
-                                    </BrowserRouter>
-                                </Provider>
+                                <BrowserRouter>
+                                    <Layout />
+                                </BrowserRouter>
                             </WalletModalProvider>
                         </WalletProvider>
                     </ConnectionProvider>
                 </PlanetConfigProvider>
-            </Provider>
         </>
     );
 }

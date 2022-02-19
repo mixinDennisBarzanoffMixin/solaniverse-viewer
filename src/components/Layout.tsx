@@ -1,23 +1,51 @@
-import { Outlet } from "react-router-dom";
+import { useLocation, Location, matchPath } from "react-router-dom";
 import {Drawer, DrawerItem, DrawerMain, DrawerSection} from './Drawer/Drawer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingBag, faWallet, faBoxes, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faBoxes, faEye } from '@fortawesome/free-solid-svg-icons';
 import {faTwitter,faDiscord} from '@fortawesome/free-brands-svg-icons';
 import logo from '../assets/logo.jpeg';
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { SelectWalletButton } from "../views/SelectWalletButton";
-// import '@font-awesome/css/font-awesome.css';
+import { FC, useEffect, useState } from "react";
+import Viewer from "../pages/Viewer";
+import Inventory from "../pages/Inventory";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 
-// const MaxWidthSelectWalletButton
-
-const Layout = () => {
+const Layout:FC = (props) => {
+    const location = useLocation();
+    const [pages, setPages] = useState<{[string: string]: JSX.Element}>({});
+    const pageCondition = (location: Location, key: string) => !!matchPath(location.pathname, key);
+    const noSuchPage = <p>no such page</p>
+    useEffect(() => {
+        const allPages = {
+            '/viewer': <Viewer></Viewer>,
+            '/inventory': <Inventory></Inventory>,
+            '*': noSuchPage,
+        }
+        const match = Object.entries(allPages).find(([key, value]) => pageCondition(location, key));
+        if (match !== undefined) {
+            const [key, element] = match;
+            setPages({...pages, [key]: element});
+        }
+    }, [location]);
 
   return (
     <>
         <div className="container">
             <div className="drawer-space">
-                <Outlet />
+                <div style={{position: 'relative', width: '100%', height: '100%'}}>
+                    {Object.entries(pages).map((entry) => {
+                        const [key, element] = entry;
+                        return <div style={
+                            {
+                                position: 'absolute',
+                                top: 0, left: 0, right: 0, bottom: 0,
+                                ...(pageCondition(location, key) ? {display: 'block'} : {display: 'none'})
+                            }
+                        }>{element}</div>
+                    })}
+                    {!Object.keys(pages).find((key) => pageCondition(location, key)) && noSuchPage}
+                </div>
             </div>
             <Drawer>
                 <DrawerMain logo={logo} wallet={
@@ -29,7 +57,7 @@ const Layout = () => {
                     <DrawerItem to="/viewer" icon={<FontAwesomeIcon icon={faEye} size="1x"/>}>Viewer</DrawerItem>
                 </DrawerSection>
                 <DrawerSection title="misc">
-                    <DrawerItem to="/" icon={<FontAwesomeIcon icon={faBoxes} size="1x"></FontAwesomeIcon>}>Inventory</DrawerItem>
+                    <DrawerItem to="/inventory" icon={<FontAwesomeIcon icon={faBoxes} size="1x"></FontAwesomeIcon>}>Inventory</DrawerItem>
                 </DrawerSection>
                 <div style={{height: '1em'}}></div>
                 <DrawerSection title="social">
