@@ -63,7 +63,12 @@ const Viewer = () => {
             });
             const Unity = module.default;
             const GeneratePlanet = (seed: string) => {
-                unityContext.send("GameController", "GeneratePlanet", parseInt(seed));
+                if(!seed)
+                {
+                    console.log("No seed supplied for planet generation");
+                    return;
+                }
+                unityContext.send("GameController", "GeneratePlanet", seed);
             }
             
             setComponent( 
