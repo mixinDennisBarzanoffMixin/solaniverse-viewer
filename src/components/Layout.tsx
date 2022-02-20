@@ -1,7 +1,7 @@
 import { useLocation, Location, matchPath } from "react-router-dom";
 import {Drawer, DrawerItem, DrawerMain, DrawerSection} from './Drawer/Drawer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBoxes, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faBoxes, faEye, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import {faTwitter,faDiscord} from '@fortawesome/free-brands-svg-icons';
 import logo from '../assets/logo.jpeg';
 import { SelectWalletButton } from "../views/SelectWalletButton";
@@ -9,6 +9,8 @@ import { FC, useEffect, useState } from "react";
 import Viewer from "../pages/Viewer";
 import Inventory from "../pages/Inventory";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import Home from "../pages/Mint/src/Home";
+import { candyMachineId, connection, rpcHost, txTimeout } from "../config";
 
 
 const Layout:FC = (props) => {
@@ -20,6 +22,13 @@ const Layout:FC = (props) => {
         const allPages = {
             '/viewer': <Viewer></Viewer>,
             '/inventory': <Inventory></Inventory>,
+            '/mint': 
+              <Home
+                candyMachineId={candyMachineId}
+                connection={connection}
+                txTimeout={txTimeout}
+                rpcHost={rpcHost}
+              />,
             '*': noSuchPage,
         }
         const match = Object.entries(allPages).find(([key, value]) => pageCondition(location, key));
@@ -58,6 +67,7 @@ const Layout:FC = (props) => {
                 </DrawerSection>
                 <DrawerSection title="misc">
                     <DrawerItem to="/inventory" icon={<FontAwesomeIcon icon={faBoxes} size="1x"></FontAwesomeIcon>}>Inventory</DrawerItem>
+                    <DrawerItem to="/mint" icon={<FontAwesomeIcon icon={faShoppingBag} size="1x"></FontAwesomeIcon>}>Mint</DrawerItem>
                 </DrawerSection>
                 <div style={{height: '1em'}}></div>
                 <DrawerSection title="social">

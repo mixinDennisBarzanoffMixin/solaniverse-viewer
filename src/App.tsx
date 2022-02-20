@@ -22,6 +22,33 @@ import {
 } from '@solana/wallet-adapter-wallets';
 import { WALLET_NETWORK } from "./config";
 import { PlanetConfigProvider } from "./providers/planet_config_provider";
+import { createTheme, ThemeProvider } from "@material-ui/core";
+import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
+
+const theme = createTheme({
+    palette: {
+        type: 'dark',
+    },
+    overrides: {
+        MuiButtonBase: {
+            root: {
+                justifyContent: 'flex-start',
+            },
+        },
+        MuiButton: {
+            root: {
+                textTransform: undefined,
+                padding: '12px 16px',
+            },
+            startIcon: {
+                marginRight: 8,
+            },
+            endIcon: {
+                marginLeft: 8,
+            },
+        },
+    },
+});
 
 function App() {
     const network = WALLET_NETWORK;
@@ -45,21 +72,26 @@ function App() {
         [network]
     );
 
+    
 
 
     return (
         <>
-                <PlanetConfigProvider>
-                    <ConnectionProvider endpoint={endpoint}>
-                        <WalletProvider wallets={wallets} autoConnect>
-                            <WalletModalProvider>
-                                <BrowserRouter>
-                                    <Layout />
-                                </BrowserRouter>
-                            </WalletModalProvider>
-                        </WalletProvider>
-                    </ConnectionProvider>
-                </PlanetConfigProvider>
+            <ThemeProvider theme={theme}>
+                <WalletDialogProvider>
+                    <PlanetConfigProvider>
+                        <ConnectionProvider endpoint={endpoint}>
+                            <WalletProvider wallets={wallets} autoConnect>
+                                <WalletModalProvider>
+                                    <BrowserRouter>
+                                        <Layout />
+                                    </BrowserRouter>
+                                </WalletModalProvider>
+                            </WalletProvider>
+                        </ConnectionProvider>
+                    </PlanetConfigProvider>
+                </WalletDialogProvider>
+            </ThemeProvider>
         </>
     );
 }
