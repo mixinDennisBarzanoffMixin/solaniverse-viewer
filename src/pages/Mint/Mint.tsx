@@ -223,7 +223,7 @@ export interface HomeProps {
     rpcHost: string;
 }
 
-const Home = (props: HomeProps) => {
+const Mint = (props: HomeProps) => {
     const [balance, setBalance] = useState<number>();
     const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
     const [isActive, setIsActive] = useState(false); // true when countdown completes or whitelisted
@@ -420,13 +420,15 @@ const Home = (props: HomeProps) => {
         <main>
             <MainContainer>
                 <WalletContainer>
-                    <Logo><a href="https://solaniverse.online/" target="_blank" rel="noopener noreferrer"><img alt="" src="logo.png"/></a></Logo>
+                    <Logo><a href="https://www.thelaserverse.com/" target="_blank" rel="noopener noreferrer"><img alt="" src="logo.png"/></a></Logo>
                     <Menu>
                     </Menu>
                     <Wallet>
-                        {wallet ?
-                            <WalletAmount>{(balance || 0).toLocaleString()} SOL<ConnectButton/></WalletAmount> :
-                            <ConnectButton>Connect Wallet</ConnectButton>}
+                        {
+                            wallet &&
+                            <WalletAmount>{(balance || 0).toLocaleString()} SOL<ConnectButton/></WalletAmount>
+                        }
+                             {/*<ConnectButton>Connect Wallet</ConnectButton>*/}
                     </Wallet>
                 </WalletContainer>
                 <ShimmerTitle>MINT IS LIVE !</ShimmerTitle>
@@ -525,4 +527,4 @@ const Home = (props: HomeProps) => {
     );
 };
 
-export default Home;
+export default Mint;

@@ -9,7 +9,7 @@ import { FC, useEffect, useState } from "react";
 import Viewer from "../pages/Viewer";
 import Inventory from "../pages/Inventory";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import Home from "../pages/Mint/src/Home";
+import Mint from "../pages/Mint/Mint";
 import { candyMachineId, connection, rpcHost, txTimeout } from "../config";
 
 
@@ -23,7 +23,7 @@ const Layout:FC = (props) => {
             '/viewer': <Viewer></Viewer>,
             '/inventory': <Inventory></Inventory>,
             '/mint': 
-              <Home
+              <Mint
                 candyMachineId={candyMachineId}
                 connection={connection}
                 txTimeout={txTimeout}
