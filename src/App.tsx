@@ -67,19 +67,19 @@ function App() {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <WalletDialogProvider>
-                    <PlanetConfigProvider>
-                        <ConnectionProvider endpoint={endpoint}>
-                            <WalletProvider wallets={wallets}>
+                <WalletProvider wallets={wallets}>
+                    <WalletDialogProvider>
+                        <PlanetConfigProvider>
+                            <ConnectionProvider endpoint={endpoint}>
                                 <WalletModalProvider>
                                     <BrowserRouter>
                                         <Layout />
                                     </BrowserRouter>
                                 </WalletModalProvider>
-                            </WalletProvider>
-                        </ConnectionProvider>
-                    </PlanetConfigProvider>
-                </WalletDialogProvider>
+                            </ConnectionProvider>
+                        </PlanetConfigProvider>
+                    </WalletDialogProvider>
+                </WalletProvider>
             </ThemeProvider>
         </>
     );
