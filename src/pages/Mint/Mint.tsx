@@ -176,10 +176,6 @@ const MintContainer = styled.div`
 `;
 
 const DesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  gap: 20px;
 `;
 
 const Price = styled(Chip)`
@@ -190,8 +186,9 @@ const Price = styled(Chip)`
 `;
 
 const Image = styled.img`
-  height: 400px;
-  width: auto;
+  height: 200px;
+  width: 250px;
+  object-fit: cover;
   border-radius: 20px;
 `;
 
@@ -418,24 +415,12 @@ const Mint = (props: HomeProps) => {
 
     return (
         <main>
-            <MainContainer>
-                <WalletContainer>
-                    <Logo><a href="https://www.thelaserverse.com/" target="_blank" rel="noopener noreferrer"><img alt="" src="logo.png"/></a></Logo>
-                    <Menu>
-                    </Menu>
-                    <Wallet>
-                        {
-                            wallet &&
-                            <WalletAmount>{(balance || 0).toLocaleString()} SOL<ConnectButton/></WalletAmount>
-                        }
-                             {/*<ConnectButton>Connect Wallet</ConnectButton>*/}
-                    </Wallet>
-                </WalletContainer>
-                <ShimmerTitle>MINT IS LIVE !</ShimmerTitle>
-                <br/>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh'}}>
+                {/* <ShimmerTitle>MINT IS LIVE !</ShimmerTitle> */}
+                {/* <br/> */}
 
 
-                <MintContainer>
+                {/* <MintContainer> */}
                     <DesContainer>
                         <NFT elevation={3}>
                             <h2>Solaniverse Planets</h2>
@@ -509,8 +494,8 @@ const Mint = (props: HomeProps) => {
                                 Explorer</SolExplorerLink>}
                         </NFT>
                     </DesContainer>
-                </MintContainer>
-            </MainContainer>
+                {/* </MintContainer> */}
+            </div>
             <Snackbar
                 open={alertState.open}
                 autoHideDuration={6000}
