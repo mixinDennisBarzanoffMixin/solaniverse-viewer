@@ -5,6 +5,8 @@ import { usePlanetConfig } from '../providers/planet_config_provider';
 import { faCompress, faExpand } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SquareIconButton from '../components/Button/SquareIconButton';
+import { useSearchParams } from 'react-router-dom';
+import state from '@project-serum/anchor/dist/program/namespace/state';
 
 
 
@@ -43,8 +45,21 @@ const Viewer = () => {
   const UnityComponent: FC<UnityComponentInt> = (props) => {
     
     const [component,setComponent] = useState<UnityBundle>() //add const
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [initialized, setInitialized] = useState(false);
+    const id = searchParams.get('id');
+    console.log('varss');
+    console.log(id);
+    console.log(component);
+    console.log('varss');
 
     const mounted = useRef(false);
+    useEffect(() => {
+        console.log(`url planet chnage id: ${id}`);
+        if (id != null) {
+            component?.onShouldGenerate(id);
+        }
+    }, [id, initialized]);
     useEffect(() => {
     if (!mounted.current) {
         // do componentDidMount logic
@@ -59,7 +74,10 @@ const Viewer = () => {
                 productVersion: "0.1",
             });
             unityContext.on("SceneInitialized", () => {
-                props.setInitialized(true);
+                setInitialized(true);
+                setTimeout(() =>
+                    props.setInitialized(true), 1000
+                );
             });
             const Unity = module.default;
             const GeneratePlanet = (seed: string) => {
@@ -83,12 +101,7 @@ const Viewer = () => {
             );
         });
         mounted.current = true;
-    } else {
-        // do componentDidUpdate logic
-        // seed changed
-        component?.onShouldGenerate(props.seed);
-        console.log('regenerating planet for ' + props.seed);
-    }
+    } 
     });
     
     if (component == null) return null;
