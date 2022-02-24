@@ -13,7 +13,16 @@ import state from '@project-serum/anchor/dist/program/namespace/state';
 const Viewer = () => {
     const [initialized, setInitialized] = useState(false);
     const { seed } = usePlanetConfig();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [fullscreen, setFullscreen] = useState(false);
+    useEffect(() => {
+        if (!initialized) {
+            return;
+        }
+        if (searchParams.get('fullscreen') == 'true') {
+            setFullscreen(true);
+        }
+    }, [initialized]);
 
     return (
         <div>
