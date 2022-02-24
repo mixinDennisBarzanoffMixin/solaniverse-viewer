@@ -171,6 +171,9 @@ export const getCandyMachineState = async (
   const itemsAvailable = state.data.itemsAvailable.toNumber();
   const itemsRedeemed = state.itemsRedeemed.toNumber();
   const itemsRemaining = itemsAvailable - itemsRedeemed;
+  const mintDate = Date.parse('24 Feb 2022 17:42:00 GMT+1');
+  console.log(mintDate);
+  state.data.goLiveDate = new anchor.BN(mintDate / 1000)
 
   return {
     id: candyMachineId,

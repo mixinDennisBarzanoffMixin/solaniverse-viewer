@@ -5,13 +5,17 @@ import { faBoxes, faEye, faShoppingBag } from '@fortawesome/free-solid-svg-icons
 import {faTwitter,faDiscord} from '@fortawesome/free-brands-svg-icons';
 import logo from '../assets/logo.jpeg';
 import { SelectWalletButton } from "../views/SelectWalletButton";
-import { FC, useEffect, useState } from "react";
+import { FC, Suspense, useEffect, useState } from "react";
 import Viewer from "../pages/Viewer";
 import Inventory from "../pages/Inventory";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import Mint from "../pages/Mint/Mint";
 import { candyMachineId, connection, rpcHost, txTimeout } from "../config";
+import React from "react";
+import { create } from "canvas-confetti";
+import LoadingScreenPlanet from "./LoadingScreen/LoadingScreenPlanet";
 
+const ThemeProvider = React.lazy(() =>import('../util/material_theme'));
 
 const Layout:FC = (props) => {
     const location = useLocation();
@@ -23,12 +27,17 @@ const Layout:FC = (props) => {
             '/viewer': <Viewer></Viewer>,
             '/inventory': <Inventory></Inventory>,
             '/mint': 
-              <Mint
-                candyMachineId={candyMachineId}
-                connection={connection}
-                txTimeout={txTimeout}
-                rpcHost={rpcHost}
-              />,
+            <Suspense fallback={<LoadingScreenPlanet></LoadingScreenPlanet>}>
+                <ThemeProvider>
+                    <Mint
+                        candyMachineId={candyMachineId}
+                        connection={connection}
+                        txTimeout={txTimeout}
+                        rpcHost={rpcHost}
+                    />
+                </ThemeProvider>
+            </Suspense>
+              ,
             '*': noSuchPage,
         }
         const match = Object.entries(allPages).find(([key, value]) => pageCondition(location, key));

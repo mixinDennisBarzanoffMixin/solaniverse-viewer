@@ -13,33 +13,6 @@ import {
 } from '@solana/wallet-adapter-wallets';
 import {rpcHost, WALLET_NETWORK} from "./config";
 import { PlanetConfigProvider } from "./providers/planet_config_provider";
-import { createTheme, ThemeProvider } from "@material-ui/core";
-import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
-
-const theme = createTheme({
-    palette: {
-        type: 'dark',
-    },
-    overrides: {
-        MuiButtonBase: {
-            root: {
-                justifyContent: 'flex-start',
-            },
-        },
-        MuiButton: {
-            root: {
-                textTransform: undefined,
-                padding: '12px 16px',
-            },
-            startIcon: {
-                marginRight: 8,
-            },
-            endIcon: {
-                marginLeft: 8,
-            },
-        },
-    },
-});
 
 function App() {
     const network = WALLET_NETWORK;
@@ -66,9 +39,7 @@ function App() {
 
     return (
         <>
-            <ThemeProvider theme={theme}>
                 <WalletProvider wallets={wallets}>
-                    <WalletDialogProvider>
                         <PlanetConfigProvider>
                             <ConnectionProvider endpoint={endpoint}>
                                 <WalletModalProvider>
@@ -78,9 +49,7 @@ function App() {
                                 </WalletModalProvider>
                             </ConnectionProvider>
                         </PlanetConfigProvider>
-                    </WalletDialogProvider>
                 </WalletProvider>
-            </ThemeProvider>
         </>
     );
 }
