@@ -2,7 +2,7 @@ import { useLocation, Location, matchPath } from "react-router-dom";
 import {Drawer, DrawerItem, DrawerMain, DrawerSection} from './Drawer/Drawer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBoxes, faEye, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
-import {faTwitter,faDiscord} from '@fortawesome/free-brands-svg-icons';
+import {faTwitter,faDiscord, faEllo} from '@fortawesome/free-brands-svg-icons';
 import logo from '../assets/logo.jpeg';
 import { SelectWalletButton } from "../views/SelectWalletButton";
 import { FC, Suspense, useEffect, useState } from "react";
@@ -14,6 +14,7 @@ import { candyMachineId, connection, rpcHost, txTimeout } from "../config";
 import React from "react";
 import { create } from "canvas-confetti";
 import LoadingScreenPlanet from "./LoadingScreen/LoadingScreenPlanet";
+import LandingPage from "../pages/LandingPage";
 
 const ThemeProvider = React.lazy(() =>import('../util/material_theme'));
 
@@ -24,6 +25,7 @@ const Layout:FC = (props) => {
     const noSuchPage = <p>no such page</p>
     useEffect(() => {
         const allPages = {
+            '/': <LandingPage></LandingPage>,
             '/viewer': <Viewer></Viewer>,
             '/inventory': <Inventory></Inventory>,
             '/mint': 
@@ -77,6 +79,7 @@ const Layout:FC = (props) => {
                 <DrawerSection title="misc">
                     <DrawerItem to="/inventory" icon={<FontAwesomeIcon icon={faBoxes} size="1x"></FontAwesomeIcon>}>Inventory</DrawerItem>
                     <DrawerItem to="/mint" icon={<FontAwesomeIcon icon={faShoppingBag} size="1x"></FontAwesomeIcon>}>Mint</DrawerItem>
+                    <DrawerItem to="/" icon={<FontAwesomeIcon icon={faEllo} size="1x"></FontAwesomeIcon>}>About</DrawerItem>
                 </DrawerSection>
                 <div style={{height: '1em'}}></div>
                 <DrawerSection title="social">

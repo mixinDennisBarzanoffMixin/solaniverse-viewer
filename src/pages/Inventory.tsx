@@ -9,6 +9,8 @@ import LoadingScreenControls from '../components/LoadingScreen/LoadingScreenCont
 import { usePlanetConfig } from '../providers/planet_config_provider';
 import { useNavigate } from "react-router-dom";
 import LoadingScreenPlanet from '../components/LoadingScreen/LoadingScreenPlanet';
+import NoPlanetsPage from './NoPlanetsPage';
+import NotLoggedInScreen from './NotLoggedInScreen';
 
 
 // const connection = new Connection(clusterApiUrl(WALLET_NETWORK));
@@ -202,26 +204,28 @@ const useShuttles = () => {
   return {shuttles, loading};
 }
 
+const freePlanet1: Planet = {
+  seed: '224086878',
+  authority: "Gw9TR8S1pripPSXCk8zvWVE42ddqa71ZFBNJZg8cJ1Qo",
+  name: "L'uridian",
+  resourceType: "Aquamarine",
+  resourse_quantity: "Limited",
+  size: "Meduim",
+  skyType: "Calm",
+  uri: "https://arweave.net/4sExF3RWjDrG015_dGRlis56_5BzHlQQYsz9QPEVeyg",
+};
+
 
 const Inventory = () => {
     const shuttles = useShuttles();
     const planetConfig = usePlanetConfig();
     let navigate = useNavigate()
+    const { publicKey } = useWallet();
 
-    console.log(shuttles);
-    if (shuttles.loading) {
-      return <LoadingScreenPlanet enabled={true}></LoadingScreenPlanet>;
-    }
-    const hanleShuttleSelected = (entity: NFTEntity) => {
-      if (isPlanet(entity)) {
-        planetConfig.setSeed(entity.seed);
-        navigate(`/viewer?id=${entity.seed}`)
-      }
-    }
-    return (
+    const planetsSection = (planets: NFTEntity[]) => (
       <div className="examples">
-        <div className="examples__cards">
-          {shuttles.shuttles.map((shuttle, index) => {
+         <div className="examples__cards">
+          {planets.map((shuttle, index) => {
             return (
               <div className={`fade-in fade-delay-${index + 1}`} key={index}>
                   <section className="examples__card">
@@ -234,8 +238,42 @@ const Inventory = () => {
               </div>
             );
           })}
-        </div>
+         </div>
       </div>
+    );
+
+    
+    if (publicKey == null) {
+      return (
+        <div style={{overflow: 'auto'}}>
+          <NotLoggedInScreen>
+            {planetsSection([freePlanet1])}
+          </NotLoggedInScreen>
+        </div>
+      )
+    }
+
+    console.log(shuttles);
+    if (shuttles.loading) {
+      return <LoadingScreenPlanet enabled={true}></LoadingScreenPlanet>;
+    }
+    const hanleShuttleSelected = (entity: NFTEntity) => {
+      if (isPlanet(entity)) {
+        planetConfig.setSeed(entity.seed);
+        navigate(`/viewer?id=${entity.seed}`)
+      }
+    }
+    if (shuttles.loading == false && shuttles.shuttles.length == 0) {
+        return <div style={{overflow: 'auto'}}>
+          <NoPlanetsPage>
+            {planetsSection([freePlanet1])}
+          </NoPlanetsPage>
+        </div>
+    }
+    return (
+        <>
+          {planetsSection(shuttles.shuttles)}
+        </>
     );
   };
   

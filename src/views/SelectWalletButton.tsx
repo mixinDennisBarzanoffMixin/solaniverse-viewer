@@ -73,15 +73,15 @@ export const SelectWalletButton: FC<ButtonProps> = ({ children, ...props }) => {
       color: styles.color, flexGrow: 2,...textStyles,
     };
 
-    if (!wallet) return <WalletModalButton {...props} style={{...styles, ...textStyles}}>{children}</WalletModalButton>;
-    if (!base58) return <WalletConnectButton {...props} style={{...styles, ...textStyles}}>{children}</WalletConnectButton>;
+    if (!wallet) return <WalletModalButton {...props} style={{...styles, ...textStyles, ...props.style}}>{children}</WalletModalButton>;
+    if (!base58) return <WalletConnectButton {...props} style={{...styles, ...textStyles, ...props.style}}>{children}</WalletConnectButton>;
 
     return (
         <div className="wallet-adapter-dropdown" style={{width: '100%'}}>
             <Button
                 aria-expanded={active}
                 className="wallet-adapter-button-trigger"
-                style={{ pointerEvents: active ? 'none' : 'auto', ...props.style, ...styles }}
+                style={{ pointerEvents: active ? 'none' : 'auto', ...styles, ...props.style}}
                 onClick={openDropdown}
                 startIcon={<WalletIcon wallet={wallet} style={iconStyles}/>}
                 {...props}
